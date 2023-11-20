@@ -1,0 +1,10 @@
+*log*
+venv
+*.pyc
+*.pyo
+*.so
+*.egg-info
+*.dist-info
+*.egg
+*.egg-link
+*__pycache__*

@@ -1,0 +1,8 @@
+[project]
+name = "sber-lisa-alert"
+version = "0.0.1"
+requires-python = "<=3.9.18,>=3.8"
+dependencies = [
+    "smart-app-framework==2.3.0rc20",
+    "pip==23.3.1"
+]

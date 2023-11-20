@@ -1,0 +1,104 @@
+{
+  "main_form": {
+    "lifetime": 600,
+    "required": true,
+    "avalaible": false,
+    "fields": {
+      "approve": {
+        "filler": {
+          "type": "approve",
+          "command": "ANSWER_TO_USER",
+          "yes_words": ["да", "хорошо", "конечно", "давай"],
+          "no_words": ["нет", "не", "не хочу", "не надо"]
+        },
+        "on_filled_actions": [
+          {
+            "type": "else",
+            "requirement": {
+              "type": "template",
+              "template": "{{ main_form.approve == True }}"
+            },
+            "action": {
+              "type": "run_scenario",
+              "scenario": "show_unknown_scenario"
+            },
+            "else_action": {
+              "type": "break_scenario"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "prompt_unknown_form": {
+    "fields": {
+      "seen_this_person": {
+        "filler": {
+          "type": "approve",
+          "command": "ANSWER_TO_USER",
+          "yes_words": ["да", "хорошо", "конечно", "давай"],
+          "no_words": ["нет", "не", "не хочу", "не надо"]
+        },
+        "on_filled_actions": [
+          {
+            "type": "else",
+            "requirement": {
+              "type": "template",
+              "template": "{{ main_form.seen_this_person == True }}"
+            },
+            "action": {
+              "type": "run_scenario",
+              "scenario": "ask_continue_scenario"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "ask_continue_form": {
+    "fields": {
+      "continue": {
+        "filler": {
+          "type": "approve",
+          "command": "ANSWER_TO_USER",
+          "yes_words": ["продолжить"],
+          "no_words": ["закончить"]
+        },
+        "on_filled_actions": [
+          {
+            "type": "else",
+            "requirement": {
+              "type": "template",
+              "template": "{{ main_form.continue == True }}"
+            },
+            "action": {
+              "type": "run_scenario",
+              "scenario": "show_unknown_scenario"
+            },
+            "else_action": {
+              "type": "composite",
+              "actions": [
+                {
+                  "type": "string",
+                  "command": "ANSWER_TO_USER",
+                  "nodes": {
+                    "items": [
+                      {
+                        "bubble": {
+                          "text": "Спасибо за помощь! Увидимся!"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "break_scenario"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
