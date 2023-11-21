@@ -27,10 +27,10 @@
         "behavior": "common_behavior",
         "params": {
           "url": "https://randomuser.me/api",
-          "method": "GET",
+          "method": "get",
           "json": {
             "type": "unified_template",
-            "template": "{{ data }}"
+            "template": "{{ data|tojson }}"
           }
         },
         "store": "stored_value"
@@ -42,7 +42,7 @@
           "items": [
             {
               "bubble": {
-                "text": "Вот человек рядом. Видели его недавно? {{ stored_value }}"
+                "text": "Вот человек рядом. Видели его недавно? {{stored_value}}"
               }
             }
           ]
